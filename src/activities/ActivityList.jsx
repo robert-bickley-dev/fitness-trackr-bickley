@@ -1,10 +1,18 @@
+import { useState } from "react";
+import { createActivity, deleteActivity } from "../api/activities";
+
 export default function ActivityList({ activities, token }) {
+  const [error, setError] = useState(null);
+
+
+
+
+
   return (
     <ul>
       {activities.map((activity) => (
-        <li key={activity.id}>{activity.name}</li>
+      
       ))}
-      {token ? <button>delete</button> : <></>}
     </ul>
   );
 }
