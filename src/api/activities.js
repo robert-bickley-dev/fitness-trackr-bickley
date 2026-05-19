@@ -35,3 +35,22 @@ export async function createActivity(token, activity) {
     throw Error(result.message);
   }
 }
+
+/**
+ * Deletes an existing activity from the API.
+ * A valid token is required.
+ */
+export async function deleteActivity(token, activity) {
+  const response = await fetch(API + `/activities/${activity.id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+  });
+
+  if (!response.ok) {
+    const result = await response.json();
+    throw Error(result.message);
+  }
+}
