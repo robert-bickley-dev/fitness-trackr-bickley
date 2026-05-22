@@ -41,12 +41,13 @@ export async function createActivity(token, activity) {
  * A valid token is required.
  */
 export async function deleteActivity(token, id) {
+  if (!token) {
+    throw Error("You must be signed in to delete an activity.");
+  }
+
   const response = await fetch(API + "/activities/" + id, {
     method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
-    },
+    headers: { Authorization: "Bearer " + token },
   });
 
   if (!response.ok) {

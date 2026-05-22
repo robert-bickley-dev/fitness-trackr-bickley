@@ -1,18 +1,24 @@
 import { useState } from "react";
 import { deleteActivity } from "../api/activities";
+import { useAuth } from "../auth/AuthContext";
 
-export default function ActivityList({ activities, token }) {
+export default function ActivityList({ activities, syncActivities }) {
   return (
     <ul>
       {activities.map((activity) => (
-        <ActivityListItem key={activity.id} activity={activity} token={token} />
+        <ActivityListItem
+          key={activity.id}
+          activity={activity}
+          syncActivities={syncActivities}
+        />
       ))}
     </ul>
   );
 }
 
-export function ActivityListItem({ activity, token, syncActivities }) {
-  // grab the token from prop, and the error from State
+export function ActivityListItem({ activity, syncActivities }) {
+  // grab the token from context, and the error from State
+  const { token } = useAuth();
   const [error, setError] = useState(null);
 
   // handler function to connect deleteActivity API function to button form action
@@ -34,7 +40,7 @@ export function ActivityListItem({ activity, token, syncActivities }) {
   // if there is a token: display a button connected to tryDeleteActivity
   // if there is an error: display the error in an alert paragraph
   return (
-    <li className="activity">
+    <li>
       <p>{activity.name}</p>
       {token && <button onClick={tryDeleteActivity}>delete</button>}
       {error && <p role="alert">{error}</p>}
