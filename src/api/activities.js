@@ -40,8 +40,8 @@ export async function createActivity(token, activity) {
  * Deletes an existing activity from the API.
  * A valid token is required.
  */
-export async function deleteActivity(token, activity) {
-  const response = await fetch(API + `/activities/${activity.id}`, {
+export async function deleteActivity(token, id) {
+  const response = await fetch(API + "/activities/" + id, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
