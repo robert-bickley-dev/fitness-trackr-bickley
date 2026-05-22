@@ -21,7 +21,11 @@ export default function ActivitiesPage() {
   return (
     <>
       <h1>Activities</h1>
-      <ActivityList activities={activities} token={token} />
+      <ActivityList
+        activities={activities}
+        token={token}
+        syncActivities={syncActivities}
+      />
       <ActivityForm syncActivities={syncActivities} token={token} />
     </>
   );
